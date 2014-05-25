@@ -1,0 +1,42 @@
+<html>
+<head>
+  <meta http-equiv="refresh" content="900" >
+</head>
+<body>
+<h3>Updated At: <%=Time.now.strftime('%H:%M:%S')%></h3>
+    <table style="width:600px">
+      <tr>
+        <th>Date</th>
+        <th>Sign Ups</th>
+        <th>MAPs sent</th>
+        <th>TRRs sent</th>
+      </tr>
+      <tr>
+        <td>Today (<%=@selected_date%>):</td>
+        <td><%=@todays_signups%></td>
+        <td><%=@todays_purchases%></td>
+        <td><%=@todays_trr%></td>
+      </tr>
+      <tr>
+        <td>Yesterday (<%=@yesterday_date%>):</td>
+        <td><%=@yesterdays_signups%></td>
+        <td><%=@yesterdays_purchases%></td>
+        <td><%=@yesterdays_trr%></td>
+      </tr>
+    </table>
+<br>
+<br>
+<br>
+<p id="demo"></p>
+<script>
+        var greeting;
+        if ("<%@vero%>" !='') {
+            greeting = "Vero events went out today? &#x2713;";
+        }
+        else {
+            greeting = "Vero events went out today? &#x2717;";
+        }
+        document.getElementById("demo").innerHTML = greeting;
+</script>
+</body>
+</html>
