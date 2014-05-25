@@ -6,5 +6,5 @@ preload_app true
 if ENV['RACK_ENV']=="production"
   @app_path = './'
 end
-listen "#{@app_path}/tmp/sockets/unicorn.sock", :backlog => 64
+listen "#{@app_path}/tmp/sockets/unicorn.sock", :backlog => 64,roles: %w{web app db}
 pid "#{@app_path}/tmp/pids/unicorn.pid"
