@@ -1,6 +1,7 @@
 worker_processes 3
 timeout 300
 preload_app true
+listen 4567
 
 @app_path = '/Users/netanel/Development/yotpo-workspace/yotpo-monitor'
 if ENV['RACK_ENV']=="production"
