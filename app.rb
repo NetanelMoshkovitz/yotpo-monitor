@@ -39,10 +39,9 @@ class App < Sinatra::Application
     @yesterdays_purchases = mails.where(:delivered_at=>@yesterday_date..@selected_date,:email_type_id=>1).count
     @yesterdays_trr = mails.where(:delivered_at=>@yesterday_date..@selected_date,:email_type_id=>2).count
     @yesterdays_signups=accounts.where(:created_at=>@yesterday_date..@selected_date).count
-    begin
-    @vero=TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'accounts:accounts_events').first.id
-    rescue
-    end
+
+    @vero = TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'accounts:accounts_events').count
+
     erb :index
 
   end

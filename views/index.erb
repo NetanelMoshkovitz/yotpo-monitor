@@ -27,16 +27,7 @@
 <br>
 <br>
 <br>
-<p id="demo"></p>
-<script>
-        var greeting;
-        if ("<%@vero%>" !=='') {
-            greeting = "Vero events went out today? &#x2713;";
-        }
-        else {
-            greeting = "Vero events went out today? &#x2717;";
-        }
-        document.getElementById("demo").innerHTML = greeting;
-</script>
+<p id="vero"> <%= @vero>0 ? 'Vero events went out today? &#x2713;' : 'Vero events went out today? &#x2717;' %></p>
+
 </body>
 </html>
