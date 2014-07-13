@@ -19,6 +19,9 @@ set :database_file, "config/database.yml"
 class Account < ActiveRecord::Base
 end
 
+class Review < ActiveRecord::Base
+end
+
 class TaskResourceStatus < ActiveRecord::Base
 end
 
@@ -36,11 +39,13 @@ class App < Sinatra::Application
     @todays_trr = mails.where(:email_type_id=>2).where("delivered_at > ?",@selected_date).count
     @todays_mas = mails.where(:email_type_id=>3).where("delivered_at > ?",@selected_date).count
     @todays_signups=accounts.where("created_at > ?",@selected_date).count
+    @todays_reviews=Review.where("created_at > ?",@selected_date).count
 
     @yesterdays_purchases = mails.where(:delivered_at=>@yesterday_date..@selected_date,:email_type_id=>1).count
     @yesterdays_trr = mails.where(:delivered_at=>@yesterday_date..@selected_date,:email_type_id=>2).count
     @yesterdays_mas = mails.where(:delivered_at=>@yesterday_date..@selected_date,:email_type_id=>3).count
     @yesterdays_signups=accounts.where(:created_at=>@yesterday_date..@selected_date).count
+    @yesterdays_reviews=Review.where(:created_at=>@yesterday_date..@selected_date).count
 
     #@account_vero = TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'users:accounts_events').count
     @user_vero = TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'users:vero_events').count

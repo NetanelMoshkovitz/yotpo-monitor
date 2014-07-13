@@ -2,6 +2,10 @@
 <head>
   <meta http-equiv="refresh" content="900" >
   <style>
+      h1 {text-align:center}
+      h1 {
+          color: rgb(0,255,0);
+      }
       table,th,td
       {
           border:1px solid black;
@@ -10,13 +14,15 @@
 </head>
 <body>
 <h3>Updated At: <%=Time.now.strftime('%H:%M:%S')%></h3>
-    <table style="width:800px">
+<h1>Data from the DB:</h1>
+    <table style="width:1000px" align="center">
       <tr>
         <th>Date</th>
         <th>Sign Ups</th>
         <th>MAPs sent</th>
         <th>TRRs sent</th>
         <th>MASs sent</th>
+        <th>Reviews created</th>
       </tr>
       <tr>
         <td>Today (<%=@selected_date%>):</td>
@@ -24,6 +30,7 @@
         <td><%=@todays_purchases%></td>
         <td><%=@todays_trr%></td>
         <td><%=@todays_mas%></td>
+        <td><%=@todays_reviews%></td>
       </tr>
       <tr>
         <td>Yesterday (<%=@yesterday_date%>):</td>
@@ -31,6 +38,7 @@
         <td><%=@yesterdays_purchases%></td>
         <td><%=@yesterdays_trr%></td>
         <td><%=@yesterdays_mas%></td>
+        <td><%=@yesterdays_reviews%></td>
       </tr>
     </table>
 <br>
