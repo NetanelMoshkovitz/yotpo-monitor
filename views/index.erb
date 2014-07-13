@@ -10,24 +10,26 @@
         <th>Sign Ups</th>
         <th>MAPs sent</th>
         <th>TRRs sent</th>
+        <th>MASs sent</th>
       </tr>
       <tr>
         <td>Today (<%=@selected_date%>):</td>
         <td><%=@todays_signups%></td>
         <td><%=@todays_purchases%></td>
         <td><%=@todays_trr%></td>
+        <td><%=@todays_mas%></td>
       </tr>
       <tr>
         <td>Yesterday (<%=@yesterday_date%>):</td>
         <td><%=@yesterdays_signups%></td>
         <td><%=@yesterdays_purchases%></td>
         <td><%=@yesterdays_trr%></td>
+        <td><%=@yesterdays_mas%></td>
       </tr>
     </table>
 <br>
 <br>
 <br>
-<p id="vero"> <%= @vero>0 ? 'Vero events went out today? &#x2713;' : 'Vero events went out today? &#x2717;' %></p>
-
+<p id="user_vero">Vero users events went out today?  <%= @user_vero>0 ? '&#x2713;' : '&#x2717;' %></p>
 </body>
 </html>
