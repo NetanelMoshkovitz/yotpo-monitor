@@ -43,7 +43,7 @@ class App < Sinatra::Application
     @yesterdays_signups=accounts.where(:created_at=>@yesterday_date..@selected_date).count
 
     #@account_vero = TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'users:accounts_events').count
-    @user_vero = TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'users:user_events').count
+    @user_vero = TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'users:vero_events').count
 
     erb :index
 
