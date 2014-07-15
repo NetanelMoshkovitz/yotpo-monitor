@@ -33,18 +33,20 @@ class App < Sinatra::Application
     #"#{User.last.email}"
     @selected_date=Date.current
     @yesterday_date=@selected_date-1.day
-    mails=UsersEmailControl.where("delivered_at > ?",@yesterday_date).select("email_type_id,delivered_at")
-    accounts=Account.where("created_at > ?",@yesterday_date)
-    @todays_purchases = mails.where(:email_type_id=>1).where("delivered_at > ?",@selected_date).count
-    @todays_trr = mails.where(:email_type_id=>2).where("delivered_at > ?",@selected_date).count
-    @todays_mas = mails.where(:email_type_id=>3).where("delivered_at > ?",@selected_date).count
-    @todays_signups=accounts.where("created_at > ?",@selected_date).count
+    todays_mails=UsersEmailControl.where("delivered_at > ?",@selected_date).where(:email_type_id=>[1,2,3]).count(:group=>'email_type_id')
+    yesterdays_mails=UsersEmailControl.where(:delivered_at=>@yesterday_date..@selected_date).where(:email_type_id=>[1,2,3]).count(:group=>'email_type_id')
+    #mails=UsersEmailControl.where("delivered_at > ?",@yesterday_date).select("email_type_id,delivered_at")
+    #accounts=Account.where("created_at > ?",@yesterday_date)
+    @todays_purchases = todays_mails[1]
+    @todays_trr = todays_mails[2]
+    @todays_mas = todays_mails[3]
+    @todays_signups=Account.where("created_at > ?",@selected_date).count
     @todays_reviews=Review.where("created_at > ?",@selected_date).count
 
-    @yesterdays_purchases = mails.where(:delivered_at=>@yesterday_date..@selected_date,:email_type_id=>1).count
-    @yesterdays_trr = mails.where(:delivered_at=>@yesterday_date..@selected_date,:email_type_id=>2).count
-    @yesterdays_mas = mails.where(:delivered_at=>@yesterday_date..@selected_date,:email_type_id=>3).count
-    @yesterdays_signups=accounts.where(:created_at=>@yesterday_date..@selected_date).count
+    @yesterdays_purchases = yesterdays_mails[1]
+    @yesterdays_trr = yesterdays_mails[2]
+    @yesterdays_mas = yesterdays_mails[3]
+    @yesterdays_signups=Account.where(:created_at=>@yesterday_date..@selected_date).count
     @yesterdays_reviews=Review.where(:created_at=>@yesterday_date..@selected_date).count
 
     #@account_vero = TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'users:accounts_events').count
