@@ -28,6 +28,9 @@ end
 class UsersEmailControl < ActiveRecord::Base
 end
 
+class Share < ActiveRecord::Base
+end
+
 class App < Sinatra::Application
   get '/' do
     #"#{User.last.email}"
@@ -42,12 +45,20 @@ class App < Sinatra::Application
     @todays_mas = todays_mails[3]
     @todays_signups=Account.where("created_at > ?",@selected_date).count
     @todays_reviews=Review.where("created_at > ?",@selected_date).count
+    @todays_facebook_manual_shares=Share.where("created_at > ?",@selected_date).where(:social_push_type_id=>1,:social_network_id=>1).count
+    @todays_facebook_smart_shares=Share.where("created_at > ?",@selected_date).where("social_push_type_id > ?",1).where(:social_network_id=>1).count
+    @todays_twitter_manual_shares=Share.where("created_at > ?",@selected_date).where(:social_push_type_id=>1,:social_network_id=>2).count
+    @todays_twitter_smart_shares=Share.where("created_at > ?",@selected_date).where("social_push_type_id > ?",1).where(:social_network_id=>2).count
 
     @yesterdays_purchases = yesterdays_mails[1]
     @yesterdays_trr = yesterdays_mails[2]
     @yesterdays_mas = yesterdays_mails[3]
     @yesterdays_signups=Account.where(:created_at=>@yesterday_date..@selected_date).count
     @yesterdays_reviews=Review.where(:created_at=>@yesterday_date..@selected_date).count
+    @yesterdays_facebook_manual_shares=Share.where(:created_at=>@yesterday_date..@selected_date).where(:social_push_type_id=>1,:social_network_id=>1).count
+    @yesterdays_facebook_smart_shares=Share.where(:created_at=>@yesterday_date..@selected_date).where("social_push_type_id > ?",1).where(:social_network_id=>1).count
+    @yesterdays_twitter_manual_shares=Share.where(:created_at=>@yesterday_date..@selected_date).where(:social_push_type_id=>1,:social_network_id=>2).count
+    @yesterdays_twitter_smart_shares=Share.where(:created_at=>@yesterday_date..@selected_date).where("social_push_type_id > ?",1).where(:social_network_id=>2).count
 
     #@account_vero = TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'users:accounts_events').count
     @user_vero = TaskResourceStatus.where("started_at > ?",@selected_date).where(:task_name=>'users:vero_events').count

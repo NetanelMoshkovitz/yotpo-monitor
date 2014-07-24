@@ -2,7 +2,7 @@
 <head>
   <meta http-equiv="refresh" content="900" >
   <style>
-      h1 {text-align:center}
+      h1, h3 {text-align:center}
       h1 {
           color: rgb(0,255,0);
       }
@@ -15,6 +15,7 @@
 <body>
 <h3>Updated At: <%=Time.now.strftime('%H:%M:%S')%></h3>
 <h1>Data from the DB:</h1>
+<h3>Sign Ups amd Mails:</h3>
     <table style="width:1000px" align="center">
       <tr>
         <th>Date</th>
@@ -41,6 +42,33 @@
         <td><%=@yesterdays_reviews%></td>
       </tr>
     </table>
+<br>
+<br>
+<br>
+<h3>Shares:</h3>
+<table style="width:1000px" align="center">
+  <tr>
+    <th>Date</th>
+    <th>Facebook manual pushes</th>
+    <th>Twitter manual pushes</th>
+    <th>Facebook smart pushes</th>
+    <th>Twitter smart pushes</th>
+  </tr>
+  <tr>
+    <td>Today (<%=@selected_date%>):</td>
+    <td><%=@todays_facebook_manual_shares%></td>
+    <td><%=@todays_twitter_manual_shares%></td>
+    <td><%=@todays_facebook_smart_shares%></td>
+    <td><%=@todays_twitter_smart_shares%></td>
+  </tr>
+  <tr>
+    <td>Yesterday (<%=@yesterday_date%>):</td>
+    <td><%=@yesterdays_facebook_manual_shares%></td>
+    <td><%=@yesterdays_twitter_manual_shares%></td>
+    <td><%=@yesterdays_facebook_smart_shares%></td>
+    <td><%=@yesterdays_twitter_smart_shares%></td>
+  </tr>
+</table>
 <br>
 <br>
 <br>
